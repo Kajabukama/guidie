@@ -9,6 +9,7 @@
 html, body{
    font-family: 'Share Tech Mono', monospace;
    font-size: 1.5rem;
+   height: 100%;
 }
 
 body{
@@ -16,8 +17,14 @@ body{
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   min-height: 100vh;
    background-color: salmon;
    padding: 1rem;
-   color: whitesmoke;
+   color: whitesmoke; 
+   height: 100%;
+}
+
+.main{
+   text-align: center;
+   margin: 0 auto;
+   width: 50%;
 }

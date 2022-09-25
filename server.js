@@ -1,14 +1,15 @@
-const dotenv = require("dotenv");
+const dotenv = require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const app = express();
-
-dotenv.config();
+const { logger } = require("./middleware/logger.js");
+const errorHandler = require("./middleware/error");
 
 const SERVER_PORT = process.env.PORT || 3500;
+app.use(logger);
 
 app.use(express.json());
-app.use("/", express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/root.route"));
 
 app.all("*", (req, res) => {
@@ -21,6 +22,8 @@ app.all("*", (req, res) => {
     res.type("txt").send("404 not found");
   }
 });
+
+app.use(errorHandler);
 
 app.listen(SERVER_PORT, () =>
   console.log(`Server started on http://localhost:${SERVER_PORT}`)
